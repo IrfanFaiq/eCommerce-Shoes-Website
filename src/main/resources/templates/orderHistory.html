@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Order History</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" th:href="@{/assets/css/orderHistory.css}">
+</head>
+<body>
+
+<div class="container mt-5">
+    <div class="d-flex justify-content-center row">
+        <div class="col-md-10">
+            <div class="rounded">
+                <div class="table-responsive table-borderless">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th class="text-center">
+                                <!-- Place for any additional elements -->
+                            </th>
+                            <th>Order #</th>
+<!--                            <th>Company name</th>-->
+                            <th>Status</th>
+                            <th>Product Name</th>
+                            <th>Total</th>
+                            <th>Created at</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody class="table-body">
+                        <tr class="cell-1" th:each="order : ${orders}">
+                            <td class="text-center">
+                                <!-- Place for any additional elements -->
+                            </td>
+<!--                            <td th:text="'#SO-' + ${order.orders_item_id}">#SO-13487</td>-->
+                            <td th:text="'#SO-' + ${order.orders_item_id}"></td>
+<!--                            <td th:text="${order.companyName}">Gasper Antunes</td>-->
+                            <td>
+<!--                                <span class="badge" th:classappend="'badge-' + (${order.status == 'Fullfilled' ? 'success' : (order.status == 'Confirmed' ? 'info' : 'danger'))" th:text="${order.status}">Fullfilled</span>-->
+                                <span class="badge" th:classappend="'badge-' + ${order.order.orders_status}" th:text="${order.order.orders_status}">Fullfilled</span>
+
+                            </td>
+<!--                            <td th:text="'$' + ${order.total}">$2674.00</td>-->
+                            <td th:text="${order.product.product_name.product_name}"></td>
+                            <td th:text="'$' + ${order.order.orders_totalamount}"></td>
+<!--                            <td th:text="${order.created}">Today</td>-->
+                            <td th:text="'$' + ${order.order.orders_datetime}"></td>
+                            <td></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- jQuery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!-- Bootstrap Bundle JS -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+<script th:src="@{/assets/js/orderHistory.js}"></script>
+</body>
+</html>
